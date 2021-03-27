@@ -6,20 +6,23 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        String[] input_1 = input.split(" ");
-        int N = Integer.parseInt(input_1[0]);
-        int S = Integer.parseInt(input_1[1]);
-        int M = Integer.parseInt(input_1[2]);
 
-       int[][] universe = set(N, N, S);
+        Scanner scanner = new Scanner(System.in);
+        int size = scanner.nextInt();
+        int M = 10;
+        Random random = new Random();
+        int seed = random.nextInt();
+        int Generation = 0;
+        int[][] universe = set(size, size, seed);
 
        while(M != 0){
-
-           universe = (next(universe,N,N));
+           System.out.println("Generation #" + Generation);
+           universe = (next(universe,size,size));
+           System.out.println("Alive: " + countLive(universe));
            draw(universe);
            M--;
+           Generation++;
+
            try {
                if (System.getProperty("os.name").contains("Windows"))
                    new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
@@ -27,13 +30,22 @@ public class Main {
                    Runtime.getRuntime().exec("clear");
            }
            catch (IOException | InterruptedException ignored) {}
+
                }
 
-
-
-
     }
+    public static int countLive(int[][] universe) {
+        int count = 0;
+        for (int[] ints : universe) {
+            for (int j = 0; j < ints.length; j++) {
+                if (ints[j] == 1) {
+                    count++;
+                }
 
+            }
+        }
+        return count;
+    }
     public static void draw(int[][] universe) {
 
         for (int[] ints : universe) {

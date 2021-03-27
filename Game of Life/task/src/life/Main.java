@@ -9,11 +9,9 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         int size = scanner.nextInt();
-        int M = 10;
-        Random random = new Random();
-        int seed = random.nextInt();
+        int M = 100;
         int Generation = 0;
-        int[][] universe = set(size, size, seed);
+        int[][] universe = set(size, size);
 
        while(M != 0){
            System.out.println("Generation #" + Generation);
@@ -60,10 +58,10 @@ public class Main {
         }
     }
 
-    public static int[][] set(int cols, int rows, int S) {
+    public static int[][] set(int cols, int rows) {
 
         int[][] universe = new int[cols][rows];
-        Random random = new Random(S);
+        Random random = new Random();
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 if (random.nextBoolean()) {
